@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <form action="results.html" method="GET">
+    <form action="results.html" method="GET" enctype="multipart/form-data">
         <div>
             <label for="username">Username</label>
             <input name = "username" id="username" placeholder="username" required>            
@@ -63,6 +63,49 @@
                 <label for="gender3">Other</label>
                 <input type="radio" name="gender3" id="gender3" value="3">
             </div>
+        </div>
+
+        <div>
+            <br>
+            Select your eye color:
+            <label for="eyecolor">Eye Color</label>
+            <select name="eyeColor" id="eyeColor">
+                <option value = "brown">Brown</option>
+                <option value = "blue">Blue</option>
+                <option value = "green">Green</option>
+            </select>
+        </div>
+
+        <div>
+            <br>
+            <label for="about">Tell me a fun fact about yourself:</label>
+            <textarea id="aoubt" id="about" placeholder="type here..."></textarea>
+        </div>
+
+        <input type="hidden" name="hidden" value="Hello there :3">
+
+        <div>
+            <br>
+            <label for="file">Upload a file</label>
+            <input type="file" name="file" id="file">
+        </div>
+
+        <div>
+            <br>
+            <label for="phone">Phone Number</label>
+            <input type="tel" name="phone" id="phone">
+        </div>
+
+        <div>
+            <br>
+            <label for="url">URL</label>
+            <input type="url" name="url" id="url">
+        </div>
+            
+        <div>
+            <br>
+            <label for="color">Color</label>
+            <input type="color" name="color" id="color">
         </div>
 
         <br>
