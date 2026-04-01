@@ -9,14 +9,29 @@
 <body>
     <form action="results.html" method="GET">
         <div>
-            <label>Username</label>
-            <input>            
+            <label for="username">Username</label>
+            <input name = "username" id="username" placeholder="username" required>            
         </div>
         <div>
-            <label>Password</label>
-            <input>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="email address" required>
         </div>
-        <button>Submit</button>
+        <div>
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" required min="1" max="200" step="5">
+        </div>
+        <div>
+            <label for="date">Birthdate</label>
+            <input type="date" id="date" name="date" min="2000-01-01">
+        </div>
+        <div>
+            <label>
+                Password
+                <input type="password" name = "password" placeholder="password" required>
+            </label>
+        </div>
+        <button type="reset">Clear</button>
+        <button type="submit">Submit</button>
     </form>
 
     <script src="index.js"></script>
