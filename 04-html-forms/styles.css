@@ -8,6 +8,8 @@ textarea {
 form {
     display: grid;
     gap: 1rem;
+    margin-left: 3%;
+    margin-right: 3%;
 
     @media (width > 729px) {
         grid-template-columns: 1fr 1fr;
@@ -27,15 +29,56 @@ input {
     background: var(--accent);
     color:      var(--text-1);
     border:     var(--border);
-    place
-
-    border-radius: 16px;
     padding:       1ex 2ex;
+
+    /* width: 100%; */
 }
 
-/* You must use the :: selector here */
+input:not([type="checkbox"]):not([type="radio"]) {
+    width: 100%;
+}
+
+/* You must use the :: selector here, 
+   because 'placeholder' is a pseudo-element (virtual) */
 input::placeholder {
   color: var(--placeholder);
+}
+
+.form-group:has(.fine-print) {
+    grid-column: 1 / -1;
+    /* background: red; */
+    display: flex;
+}
+
+.form-group.selectBox {
+    grid-column: 1 / -1;
+    /* background: red; */
+    display: flex;
+    flex-direction: column;;
+}
+
+.selectBox {
+    border-radius: 4px;
+    border: solid hsl(229, 12%, 45%) 1px;
+}
+
+.selectBox > * {
+    border-radius: 1px;
+    border: solid white 1px;
+    margin: 1%;
+    padding: 1ex 2ex;
+    
+    &:hover,
+    &:focus-visible {
+        background-color: hsl(from var(--accent) h s 30%);
+    }
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  /* This color persists as long as it's checked */
+  accent-color: hsl(from var(--accent) h s 80%);
+  background-color: blue;
 }
 
 /* general styling */
@@ -73,10 +116,15 @@ h1 {
   font-size: 4rem;
   font-weight: 300;
   line-height: 1;
+  margin: 5%;
 }
 
 a {
   color: hsl(from var(--accent) h s 80%);
+}
+
+p {
+    margin: 5%;
 }
 
 label {
