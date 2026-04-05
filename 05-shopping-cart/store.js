@@ -1,25 +1,44 @@
-console.log('Hello Webpage :3');
 
-// Remove Cart Item Buttons
-var buttons = document.getElementsByClassName('btn-danger');
-// console.log(buttons);
-for (var i = 0; i < buttons.length; i++) {
-    var button = buttons[i];
-    button.addEventListener('click', function(event){
-        // Listenter Function
-        event.target.parentElement.parentElement.remove();
-        updateCartTotal();
-        console.log('Item Removed');
-    });
+// Run Code Asynchronously
+if (document.readState == 'loading') {
+    document.addEventListener('DOMConentLoaded', ready);
+} else {
+    ready();
 }
 
-//--------------------------------------------------------
-console.log('#'.repeat(40));
-console.log('\n\n');
 
+//--------------------------------------------------------
+// READY 
+function ready() {
+    
+    console.log('Hello Webpage :3');
+
+    // Remove Cart Item Button Setup
+    var buttons = document.getElementsByClassName('btn-danger');
+    for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+        button.addEventListener('click', removeCartItem);
+    }
+
+    //--------------------------------------------------------
+    console.log('#'.repeat(40));
+    console.log('\n\n');
+} // - END
 
 // FUNCTIONS
 
+//--------------------------------------------------------
+// REMOVE CART ITEM    
+function removeCartItem(event){
+    // Listenter Function
+    event.target.parentElement.parentElement.remove();
+    updateCartTotal();
+    console.log('Item Removed');
+}
+
+
+//--------------------------------------------------------
+// UPDATE CART TOTAL
 function updateCartTotal() {
     // Returns A list of divs
     var cartItemContainer = document.getElementsByClassName('cart-items')[0];
