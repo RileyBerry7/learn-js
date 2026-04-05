@@ -20,12 +20,32 @@ function ready() {
         button.addEventListener('click', removeCartItem);
     }
 
+    // Quantity Input Setup
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input');
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i];
+        input.addEventListener('change', quantityChanged);
+    }
+
     //--------------------------------------------------------
     console.log('#'.repeat(40));
-    console.log('\n\n');
-} // - END
+} // ready - END
 
+
+//########################################################
 // FUNCTIONS
+
+//--------------------------------------------------------
+// QUANTITY CHANGED
+function quantityChanged(event) {
+    var input = event.target;
+   
+    // Invalid Quantity
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1;
+    }
+    updateCartTotal();
+}
 
 //--------------------------------------------------------
 // REMOVE CART ITEM    
@@ -55,5 +75,6 @@ function updateCartTotal() {
         total = total + (price * quantity);
 
     }
+    total = Math.round(total * 100) / 100;
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total;
 }
