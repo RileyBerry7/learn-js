@@ -8,12 +8,19 @@ if (document.readState == 'loading') {
 
 
 //--------------------------------------------------------
-// READY 
+// READY - setup event listeners
 function ready() {
     
     console.log('Hello Webpage :3');
 
-    // Remove From Cart Setup
+    // Add-To-Cart Setup
+    var buttons = document.getElementsByClassName('shop-item-button');
+    for (var i = 0; i < buttons.length; i++) {
+        var button = buttons[i];
+        button.addEventListener('click', addToCart);
+    }
+
+    // Remove-From-Cart Setup
     var buttons = document.getElementsByClassName('btn-danger');
     for (var i = 0; i < buttons.length; i++) {
         var button = buttons[i];
@@ -27,12 +34,9 @@ function ready() {
         input.addEventListener('change', quantityChanged);
     }
 
-    // Add To Cart Setup
-    var buttons = document.getElementsByClassName('shop-item-button');
-    for (var i = 0; i < buttons.length; i++) {
-        var button = buttons[i];
-        button.addEventListener('click', addToCart);
-    }
+    // Purchase Setup
+    var button = document.getElementsByClassName('btn-purchase')[0];
+    button.addEventListener('click', purchaseClicked);
 
     //--------------------------------------------------------
     console.log('#'.repeat(40));
@@ -41,6 +45,17 @@ function ready() {
 
 //########################################################
 // FUNCTIONS
+
+//--------------------------------------------------------
+// PURCHASE CLICKED
+function purchaseClicked() {
+    alert('Thank you for your purchase');
+    var cartItems = document.getElementsByClassName('cart-items')[0];
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild);
+    }
+    updateCartTotal();
+}
 
 //--------------------------------------------------------
 // ADD ITEM TO CART
@@ -69,6 +84,11 @@ function addItemToCart(title, price, imageSrc) {
     `;
     cartRow.innerHTML = cartRowContents;
     cartItems.append(cartRow);
+
+    var button = cartRow.getElementsByClassName('btn-danger')[0];
+    button.addEventListener('click', removeCartItem);
+    var quantityInput = cartRow.getElementsByClassName('cart-quantity-input')[0];
+    quantityInput.addEventListener('change', quantityChanged);
 }
 
 //--------------------------------------------------------
@@ -113,7 +133,7 @@ function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0];
     // Extracts all 'Cart Rows' which are divs
     var cartRows          = cartItemContainer.getElementsByClassName('cart-row');
-    var total             = 0;  
+    var total             = 0.00;  
 
     for (var i = 0; i < cartRows.length; i++) {
         var cartRow      = cartRows[i];
@@ -123,6 +143,10 @@ function updateCartTotal() {
         var quantity     = quantityElem.value;
         total = total + (price * quantity);
     }
+    // Round to 2 decimal places
     total = Math.round(total * 100) / 100;
+    // Handle 0 as a string
+    if (total == 0) total = '0.00';
+    // Update total price
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total;
 }
